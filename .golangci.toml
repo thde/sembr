@@ -1,0 +1,100 @@
+#:schema https://golangci-lint.run/jsonschema/golangci.jsonschema.json
+version = "2"
+
+[linters]
+
+enable = [
+    "revive",
+    "gocritic",
+    "gosec",
+    "bodyclose",
+    "canonicalheader",
+
+    # Error Handling & Bug Prevention
+    "err113",
+    "errname",
+    "wrapcheck",
+    "nilerr",
+    "makezero",
+    "prealloc",
+    "dogsled",
+    "unparam",
+    "staticcheck",
+
+    # Modern Go, Architecture
+    "copyloopvar",
+    "intrange",
+    "sloglint",
+    "loggercheck",
+    "perfsprint",
+    "exhaustive",
+    "exptostd",
+    "nolintlint",
+    "modernize",
+    "promlinter",
+    "usestdlibvars",
+    "usetesting",
+
+    # Testing
+    "paralleltest",
+    "thelper",
+
+    # Context
+    "noctx",
+    "containedctx",
+    "contextcheck",
+
+    # Documentation
+    "godoclint",
+    "godot",
+]
+
+[linters.settings.errcheck]
+check-type-assertions = true
+
+[linters.settings.gocritic]
+enabled-tags = ["diagnostic", "experimental", "opinionated", "performance", "style"]
+
+[linters.settings.gocritic.settings.rangeValCopy]
+sizeThreshold = 256
+
+[linters.settings.gocritic.settings.hugeParam]
+sizeThreshold = 256
+
+[linters.settings.exhaustive]
+default-signifies-exhaustive = true
+
+[linters.settings.nolintlint]
+require-explanation = true
+require-specific = true
+
+[linters.settings.godoclint]
+require-doc = true
+
+[linters.settings.godot]
+scope = "toplevel"
+
+[linters.settings.usestdlibvars]
+time-date-month = true
+time-month = true
+time-layout = true
+crypto-hash = true
+default-rpc-path = true
+sql-isolation-level = true
+tls-signature-scheme = true
+constant-kind = true
+
+[linters.settings.usetesting]
+os-temp-dir = true
+context-background = true
+context-todo = true
+
+[[linters.exclusions.rules]]
+linters = ["errcheck"]
+source = "^\\s*defer\\s+"
+
+[formatters]
+enable = ["gci", "gofmt", "gofumpt", "goimports"]
+
+[formatters.settings.gofumpt]
+extra.group-params = true
